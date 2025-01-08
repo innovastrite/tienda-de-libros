@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Panel de Ventas</h2>
+    
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3>Ventas Pendientes</h3>
+        </div>
+        <div class="card-body">
+            {% if ventas_pendientes %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Libro</th>
+                            <th>Usuario</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for venta in ventas_pendientes %}
+                        <tr>
+                            <td>{{ venta.libro.titulo }}</td>
+                            <td>{{ venta.usuario.username }}</td>
+                            <td>{{ venta.fecha_solicitud }}</td>
+                            <td>
+                                <a href="{% url 'confirmar_venta' venta.id %}" 
+                                   class="btn btn-primary btn-sm">Confirmar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No hay ventas pendientes.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

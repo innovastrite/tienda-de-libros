@@ -1,0 +1,32 @@
+{% extends 'catalogo/base.html' %}
+
+{% block title %}{{ libro.titulo }}{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card mb-4">
+        <div class="row g-0">
+            <!-- ... resto del código ... -->
+            <div class="col-md-8">
+                <div class="card-body">
+                    <!-- ... resto del código ... -->
+                    {% if compra_confirmada %}
+                        {% if compra_confirmada.token_descarga %}
+                            <a href="{% url 'descargar_libro' token=compra_confirmada.token_descarga %}" 
+                               class="btn btn-success">Descargar Libro</a>
+                        {% else %}
+                            <p class="text-warning">La descarga estará disponible cuando se confirme tu compra.</p>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'solicitar_compra' libro_id=libro.id %}" 
+                           class="btn btn-primary">
+                            {% if libro.precio == 0 %}Descargar Gratis{% else %}Comprar{% endif %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'lista_libros' %}" class="btn btn-secondary">Volver a la Lista</a>
+</div>
+{% endblock %}

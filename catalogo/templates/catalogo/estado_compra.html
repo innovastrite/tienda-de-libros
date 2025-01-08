@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h3>Estado de la Compra</h3>
+        </div>
+        <div class="card-body">
+            <h4>{{ venta.libro.titulo }}</h4>
+            <p><strong>Estado:</strong> {{ venta.get_estado_display }}</p>
+            
+            {% if venta.estado == 'CONFIRMADA' %}
+                <p class="text-success">¡Tu compra ha sido confirmada!</p>
+                <a href="{% url 'descargar_libro' venta.token_descarga %}" 
+                   class="btn btn-primary">Descargar Libro</a>
+            {% else %}
+                <p class="text-info">Tu compra está en proceso de confirmación.</p>
+                <p>Una vez que el administrador confirme tu compra, podrás descargar el libro.</p>
+            {% endif %}
+            
+            <a href="{% url 'detalle_libro' venta.libro.id %}" 
+               class="btn btn-secondary mt-2">Volver al libro</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'catalogo/base.html' %}
+{% load static %}
+
+{% block title %}Página de Inicio{% endblock %}
+
+{% block content %}
+<div class="container">
+    <aside class="sidebar">
+        <h2>Categorías</h2>
+        <ul>
+            <li><a href="?categoria=Novelas">Novelas</a></li>
+            <li><a href="?categoria=Poesía">Poesía</a></li>
+            <li><a href="?categoria=Aventura">Aventura</a></li>
+            <li><a href="?categoria=Infantil">Infantil</a></li>
+        </ul>
+        <h2>Filtros</h2>
+        <form method="get" action="">
+            <label for="precio">Precio máximo:</label>
+            <input type="number" id="precio" name="precio" placeholder="Ej. 50" class="form-control mb-2">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </form>
+    </aside>
+    <section class="main-content">
+        <h2>Libros destacados</h2>
+        <div class="row">
+            {% for libro in libros_destacados %}
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <img src="{{ libro.portada.url }}" class="card-img-top" alt="{{ libro.titulo }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ libro.titulo }}</h5>
+                        <p class="card-text">Precio: ${{ libro.precio }}</p>
+                        <a href="{% url 'detalle_libro' libro.id %}" class="btn btn-info">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <h2>Lista de libros</h2>
+        <div class="row">
+            {% for libro in libros %}
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    <img src="{{ libro.portada.url }}" class="card-img-top" alt="{{ libro.titulo }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ libro.titulo }}</h5>
+                        <p class="card-text">Precio: ${{ libro.precio }}</p>
+                        <a href="{% url 'detalle_libro' libro.id %}" class="btn btn-info">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}

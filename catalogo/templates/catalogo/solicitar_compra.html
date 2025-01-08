@@ -1,0 +1,21 @@
+<!-- catalogo/templates/catalogo/solicitar_compra.html -->
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>Compra del libro: {{ libro.titulo }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" name="cantidad" value="1" min="1" required>
+
+    <button type="submit">Comprar</button>
+</form>
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+
+<p>Precio por copia: ${{ libro.precio }}</p>
+<p>Total: ${{ libro.precio }}</p>
+{% endblock %}

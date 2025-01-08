@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Notificaciones Pendientes</h2>
+{% if notificaciones %}
+    <div class="list-group">
+    {% for notificacion in notificaciones %}
+        <div class="list-group-item">
+            <h5>Solicitud de descarga: {{ notificacion.descarga.libro.titulo }}</h5>
+            <p>Usuario: {{ notificacion.descarga.usuario.username }}</p>
+            <p>Fecha: {{ notificacion.fecha_creacion }}</p>
+            <a href="{% url 'confirmar_descarga' notificacion.descarga.id %}" 
+               class="btn btn-primary">Revisar solicitud</a>
+        </div>
+    {% endfor %}
+    </div>
+{% else %}
+    <p>No hay notificaciones pendientes</p>
+{% endif %}
+{% endblock %}

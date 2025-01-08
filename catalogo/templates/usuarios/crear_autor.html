@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Convertir Usuario a Autor</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="usuario">Seleccionar Usuario:</label>
+            <select name="usuario" id="usuario" class="form-control">
+                {% for usuario in usuarios %}
+                    <option value="{{ usuario.id }}">{{ usuario.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Convertir a Autor</button>
+    </form>
+</div>
+{% endblock %}

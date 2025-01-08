@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Descarga Pendiente</h2>
+    <div class="alert alert-info">
+        <p>Tu solicitud de descarga para "{{ descarga.libro.titulo }}" está pendiente de aprobación.</p>
+        <p>Estado actual: {{ descarga.get_estado_display }}</p>
+        <p>Fecha de solicitud: {{ descarga.fecha_solicitud|date:"d/m/Y H:i" }}</p>
+    </div>
+    <a href="{% url 'lista_libros' %}" class="btn btn-primary">Volver a la lista de libros</a>
+</div>
+{% endblock %}

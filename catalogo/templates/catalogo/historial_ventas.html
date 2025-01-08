@@ -1,0 +1,24 @@
+from datetime import timedelta
+
+def historial_ventas(request, libro_id):
+    libro = get_object_or_404(Libro, id=libro_id)
+
+    # Filtrar ventas de los últimos 30 días
+    fecha_limite = timezone.now() - timedelta(days=30)
+    ventas = Venta.objects.filter(libro=libro, fecha_solicitud__gte=fecha_limite).order_by('-fecha_solicitud')
+
+    # Calcular totales basados en las ventas filtradas
+    total_ventas = sum(venta.total for venta in ventas)
+    total_autor = total_ventas * 0.9
+    total_tienda = total_ventas * 0.1
+
+    context = {
+        'libro': libro,
+        'ventas': ventas,
+        'totales': {
+            'total_ventas': total_ventas,
+            'total_autor': total_autor,
+            'total_tienda': total_tienda,
+        },
+    }
+    return render(request, 'catalogo/historial_ventas.html', context)

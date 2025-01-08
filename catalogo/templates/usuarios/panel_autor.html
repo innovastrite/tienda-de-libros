@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Panel de Autor</h2>
+    
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Estadísticas</h5>
+                    <p>Total de ventas: ${{ total_ventas|floatformat:2 }}</p>
+                    <p>Libros vendidos: {{ libros_vendidos }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h3>Mis Libros</h3>
+        <div class="row">
+            {% for libro in libros %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if libro.portada %}
+                        <img src="{{ libro.portada.url }}" class="card-img-top" alt="{{ libro.titulo }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ libro.titulo }}</h5>
+                        <p class="card-text">Precio: ${{ libro.precio }}</p>
+                        <a href="{% url 'detalle_libro' libro.id %}" class="btn btn-primary">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p>No tienes libros publicados aún.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

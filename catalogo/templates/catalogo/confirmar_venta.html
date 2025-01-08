@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h3>Confirmar Venta</h3>
+        </div>
+        <div class="card-body">
+            <h4>{{ venta.libro.titulo }}</h4>
+            <p><strong>Usuario:</strong> {{ venta.usuario.username }}</p>
+            <p><strong>Fecha solicitud:</strong> {{ venta.fecha_solicitud }}</p>
+            
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">Confirmar Venta</button>
+                <a href="{% url 'admin_ventas' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

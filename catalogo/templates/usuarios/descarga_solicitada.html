@@ -1,0 +1,8 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h1>¡Solicitud de Descarga Realizada!</h1>
+  <p>Tu solicitud para descargar el libro "{{ libro.titulo }}" ha sido registrada correctamente.</p>
+  <p>Está pendiente de confirmación por parte del administrador. Recibirás una notificación cuando la descarga esté habilitada.</p>
+  <a href="{% url 'lista_libros' %}" class="btn btn-primary">Volver a la lista de libros</a>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <h1>¡Descarga Confirmada!</h1>
+  <p>Tu solicitud de descarga para "{{ descarga.libro.titulo }}" ha sido confirmada.</p>
+  <a href="{% url 'descargar_libro' descarga.id %}" class="btn btn-primary">Descargar PDF</a>
+{% endblock %}
